@@ -1,0 +1,5 @@
+{
+  "name": "Trace - Onboarding Demo",
+  "description": "A high-fidelity interactive simulation of the onboarding flow for the Trace iOS app, featuring structured memory entry, timeline visualization, and local-first privacy focus.",
+  "requestFramePermissions": []
+}
