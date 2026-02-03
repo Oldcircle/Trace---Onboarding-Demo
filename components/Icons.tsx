@@ -12,7 +12,11 @@ import {
   Smile,
   ArrowRight,
   TrendingUp,
-  Tag
+  Tag,
+  Sun,
+  Moon,
+  Edit2,
+  X
 } from 'lucide-react';
 
 export {
@@ -29,5 +33,9 @@ export {
   Smile,
   ArrowRight,
   TrendingUp,
-  Tag
+  Tag,
+  Sun,
+  Moon,
+  Edit2,
+  X
 };

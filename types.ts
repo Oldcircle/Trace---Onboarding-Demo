@@ -15,6 +15,8 @@ export interface TraceEntry {
 }
 
 export type TabView = 'today' | 'timeline' | 'stats';
+export type Theme = 'dark' | 'light';
+export type Language = 'en' | 'zh' | 'jp' | 'fr' | 'de' | 'es' | 'ko';
 
 export interface DailyStat {
   day: string;

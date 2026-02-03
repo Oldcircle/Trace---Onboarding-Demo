@@ -2,21 +2,29 @@ import React from 'react';
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { MOCK_STATS_TREND } from '../constants';
 import { TrendingUp, Tag, Zap, ArrowRight, Calendar } from './Icons';
+import { Theme } from '../types';
 
-const StatsTab: React.FC = () => {
+interface StatsTabProps {
+  theme: Theme;
+}
+
+const StatsTab: React.FC<StatsTabProps> = ({ theme }) => {
+  const isDark = theme === 'dark';
+  const trendColor = isDark ? '#60a5fa' : '#4f46e5'; // Blue vs Indigo
+
   return (
     <div className="pb-28 pt-6 px-5 h-full overflow-y-auto no-scrollbar">
-      <h2 className="text-white text-3xl font-bold tracking-tight mb-8">Insights</h2>
+      <h2 className={`text-3xl font-bold tracking-tight mb-8 ${isDark ? 'text-white' : 'text-zinc-900'}`}>Insights</h2>
 
       {/* Module A: Trend */}
-      <div className="bg-zinc-900/30 backdrop-blur-md p-6 rounded-[32px] border border-white/5 mb-6">
+      <div className={`backdrop-blur-md p-6 rounded-[32px] border mb-6 ${isDark ? 'bg-zinc-900/30 border-white/5' : 'bg-white/60 border-zinc-200 shadow-sm'}`}>
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400">
              <TrendingUp size={18} />
           </div>
           <div>
-            <h3 className="text-zinc-200 font-semibold text-sm tracking-tight">Emotional Trend</h3>
-            <p className="text-zinc-500 text-[10px]">Last 7 Days</p>
+            <h3 className={`font-semibold text-sm tracking-tight ${isDark ? 'text-zinc-200' : 'text-zinc-700'}`}>Emotional Trend</h3>
+            <p className={`text-[10px] ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>Last 7 Days</p>
           </div>
         </div>
         <div className="h-36 w-full -ml-2">
@@ -24,19 +32,26 @@ const StatsTab: React.FC = () => {
             <AreaChart data={MOCK_STATS_TREND}>
               <defs>
                 <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="#60a5fa" stopOpacity={0}/>
+                  <stop offset="5%" stopColor={trendColor} stopOpacity={0.4}/>
+                  <stop offset="95%" stopColor={trendColor} stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <Tooltip 
-                contentStyle={{backgroundColor: '#18181b', border: '1px solid #27272a', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.5)'}}
-                itemStyle={{color: '#fff', fontWeight: 600}}
-                cursor={{stroke: 'rgba(255,255,255,0.1)', strokeWidth: 1}}
+                contentStyle={{
+                    backgroundColor: isDark ? '#18181b' : '#ffffff', 
+                    border: isDark ? '1px solid #27272a' : '1px solid #e4e4e7', 
+                    borderRadius: '12px', 
+                    fontSize: '12px', 
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.5)',
+                    color: isDark ? '#fff' : '#000'
+                }}
+                itemStyle={{color: isDark ? '#fff' : '#18181b', fontWeight: 600}}
+                cursor={{stroke: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', strokeWidth: 1}}
               />
               <Area 
                 type="monotone" 
                 dataKey="score" 
-                stroke="#60a5fa" 
+                stroke={trendColor} 
                 strokeWidth={3} 
                 fillOpacity={1} 
                 fill="url(#colorScore)" 
@@ -48,34 +63,34 @@ const StatsTab: React.FC = () => {
 
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Module B: Top Tags */}
-        <div className="bg-zinc-900/30 backdrop-blur-md p-5 rounded-[28px] border border-white/5 flex flex-col">
+        <div className={`backdrop-blur-md p-5 rounded-[28px] border flex flex-col ${isDark ? 'bg-zinc-900/30 border-white/5' : 'bg-white/60 border-zinc-200 shadow-sm'}`}>
           <div className="flex items-center gap-2.5 mb-4">
             <div className="p-1.5 rounded-lg bg-violet-500/10 text-violet-400">
                 <Tag size={14} />
             </div>
-            <h3 className="text-zinc-200 font-semibold text-xs tracking-wide uppercase">Top Tags</h3>
+            <h3 className={`font-semibold text-xs tracking-wide uppercase ${isDark ? 'text-zinc-200' : 'text-zinc-700'}`}>Top Tags</h3>
           </div>
           <div className="space-y-3 flex-1">
             {[
-              {name: 'Work', count: 12, color: 'text-violet-300'}, 
-              {name: 'Sleep', count: 8, color: 'text-zinc-400'}, 
-              {name: 'Coffee', count: 5, color: 'text-zinc-400'}
+              {name: 'Work', count: 12, color: isDark ? 'text-violet-300' : 'text-violet-600'}, 
+              {name: 'Sleep', count: 8, color: isDark ? 'text-zinc-400' : 'text-zinc-600'}, 
+              {name: 'Coffee', count: 5, color: isDark ? 'text-zinc-400' : 'text-zinc-600'}
             ].map((t, i) => (
               <div key={i} className="flex justify-between items-center text-xs">
                 <span className={`${t.color} font-medium`}>#{t.name}</span>
-                <span className="text-zinc-500 font-mono text-[10px]">{t.count}</span>
+                <span className={`font-mono text-[10px] ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>{t.count}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Module C: Common Triggers */}
-        <div className="bg-zinc-900/30 backdrop-blur-md p-5 rounded-[28px] border border-white/5 flex flex-col">
+        <div className={`backdrop-blur-md p-5 rounded-[28px] border flex flex-col ${isDark ? 'bg-zinc-900/30 border-white/5' : 'bg-white/60 border-zinc-200 shadow-sm'}`}>
           <div className="flex items-center gap-2.5 mb-4">
             <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">
                 <Zap size={14} />
             </div>
-            <h3 className="text-zinc-200 font-semibold text-xs tracking-wide uppercase">Triggers</h3>
+            <h3 className={`font-semibold text-xs tracking-wide uppercase ${isDark ? 'text-zinc-200' : 'text-zinc-700'}`}>Triggers</h3>
           </div>
           <div className="space-y-3 flex-1">
             {[
@@ -83,7 +98,7 @@ const StatsTab: React.FC = () => {
               {name: 'Commute', count: 'Med'}, 
             ].map((t, i) => (
               <div key={i} className="flex justify-between items-center text-xs">
-                <span className="text-zinc-400 truncate max-w-[50px]">{t.name}</span>
+                <span className={`truncate max-w-[50px] ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{t.name}</span>
                 <span className={`font-bold px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wider ${t.count === 'High' ? 'text-rose-400 bg-rose-500/10' : 'text-orange-400 bg-orange-500/10'}`}>{t.count}</span>
               </div>
             ))}
@@ -101,7 +116,7 @@ const StatsTab: React.FC = () => {
                 <Calendar size={14} className="text-indigo-300"/>
                 <h3 className="text-indigo-200 text-xs font-bold uppercase tracking-widest">Weekly Focus</h3>
             </div>
-            <p className="text-white text-lg font-serif italic mb-6 leading-relaxed opacity-90">"Don't let perfectionism delay the start of your projects."</p>
+            <p className={`text-lg font-serif italic mb-6 leading-relaxed opacity-90 ${isDark ? 'text-white' : 'text-indigo-900'}`}>"Don't let perfectionism delay the start of your projects."</p>
             <button className="text-xs bg-indigo-500 hover:bg-indigo-400 text-white px-4 py-2 rounded-full font-semibold transition-colors shadow-lg shadow-indigo-500/20">
             View Context
             </button>
