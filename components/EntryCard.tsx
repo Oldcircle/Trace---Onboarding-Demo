@@ -5,12 +5,23 @@ import { MoreHorizontal, Zap, Smile, ArrowRight } from './Icons';
 interface EntryCardProps {
   entry: TraceEntry;
   theme: Theme;
+  labels?: {
+    trigger: string;
+    emotion: string;
+    insight: string;
+  };
   onClick?: () => void;
 }
 
-const EntryCard: React.FC<EntryCardProps> = ({ entry, theme, onClick }) => {
+const EntryCard: React.FC<EntryCardProps> = ({ entry, theme, labels, onClick }) => {
   const isPositive = entry.impactScore >= 0;
   const isDark = theme === 'dark';
+
+  const lbl = labels || {
+    trigger: 'Trigger',
+    emotion: 'Emotion',
+    insight: 'Insight'
+  };
 
   return (
     <div 
@@ -41,7 +52,7 @@ const EntryCard: React.FC<EntryCardProps> = ({ entry, theme, onClick }) => {
         <div className="flex items-start gap-3.5">
           <div className="mt-0.5 min-w-[20px] text-amber-500/90"><Zap size={16} /></div>
           <div>
-            <p className={`text-[10px] uppercase tracking-widest font-semibold mb-0.5 ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>Trigger</p>
+            <p className={`text-[10px] uppercase tracking-widest font-semibold mb-0.5 ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>{lbl.trigger}</p>
             <p className={`text-sm leading-relaxed font-light ${isDark ? 'text-zinc-300' : 'text-zinc-700'}`}>{entry.trigger}</p>
           </div>
         </div>
@@ -50,7 +61,7 @@ const EntryCard: React.FC<EntryCardProps> = ({ entry, theme, onClick }) => {
         <div className="flex items-start gap-3.5">
           <div className="mt-0.5 min-w-[20px] text-indigo-400"><Smile size={16} /></div>
           <div className="w-full">
-            <p className={`text-[10px] uppercase tracking-widest font-semibold mb-0.5 ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>Emotion</p>
+            <p className={`text-[10px] uppercase tracking-widest font-semibold mb-0.5 ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>{lbl.emotion}</p>
             <div className="flex items-center justify-between w-full">
               <p className={`text-sm leading-relaxed font-light ${isDark ? 'text-zinc-300' : 'text-zinc-700'}`}>{entry.emotion}</p>
               <div className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
@@ -68,7 +79,7 @@ const EntryCard: React.FC<EntryCardProps> = ({ entry, theme, onClick }) => {
         <div className="flex items-start gap-3.5 pt-1">
           <div className="mt-0.5 min-w-[20px] text-violet-400"><ArrowRight size={16} /></div>
           <div>
-            <p className={`text-[10px] uppercase tracking-widest font-semibold mb-0.5 ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>Insight</p>
+            <p className={`text-[10px] uppercase tracking-widest font-semibold mb-0.5 ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>{lbl.insight}</p>
             <p className={`text-sm leading-relaxed italic opacity-80 ${isDark ? 'text-zinc-200' : 'text-zinc-800'}`}>"{entry.suggestion}"</p>
           </div>
         </div>

@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Theme, Language } from './types';
+import { Theme, Language, TraceEntry } from './types';
 import { translations } from './translations';
-import { DEMO_ENTRY } from './constants';
-import { Sun, Moon, ArrowRight, Check, Shield, Zap, Layout, ChevronRight, Globe, ChevronDown, Download } from './components/Icons';
+import { Sun, Moon, ArrowRight, Check, Shield, Zap, Layout, ChevronRight, Globe, ChevronDown, Download, X, Play } from './components/Icons';
 import EntryCard from './components/EntryCard';
 import TimelineTab from './components/TimelineTab';
 import StatsTab from './components/StatsTab';
+import KLineAnimation from './components/KLineAnimation';
 
 // Legal Links & App Store
-const LINK_PRIVACY = "https://oldcircle.github.io/Trace-Legal-Center/#/privacy";
-const LINK_TERMS = "https://oldcircle.github.io/Trace-Legal-Center/#/terms";
 const LINK_APP_STORE = "https://apps.apple.com/in/app/trace-see-how-you-became-you/id6758615892";
 
 // Language Options
@@ -28,10 +26,27 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('en');
   const [scrolled, setScrolled] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
   const langMenuRef = useRef<HTMLDivElement>(null);
 
   const t = translations[language]; // Current translation object
   const isDark = theme === 'dark';
+
+  // Construct localized demo entry
+  const demoEntry: TraceEntry = {
+    id: 'demo-1',
+    moodScore: 35,
+    impactScore: -15,
+    ...t.demo.entry,
+    type: t.demo.entry.type as any
+  };
+
+  // Re-trigger animation when language changes
+  useEffect(() => {
+    setShowAnimation(true);
+  }, [language]);
 
   // Scroll listener for navbar glass effect
   useEffect(() => {
@@ -52,6 +67,16 @@ export default function App() {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const openPrivacy = (e: React.MouseEvent) => {
+      e.preventDefault();
+      setShowPrivacyModal(true);
+  };
+
+  const openTerms = (e: React.MouseEvent) => {
+      e.preventDefault();
+      setShowTermsModal(true);
+  };
 
   return (
     <div className={`min-h-screen transition-colors duration-1000 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 ${isDark ? 'bg-[#050505] text-zinc-100' : 'bg-[#fafafa] text-zinc-900'}`}>
@@ -76,7 +101,7 @@ export default function App() {
           {/* Center Links (Desktop) */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
              <a href="#features" className={`hover:text-blue-500 transition-colors ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{t.nav.features}</a>
-             <a href="#privacy" className={`hover:text-blue-500 transition-colors ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{t.nav.privacy}</a>
+             <a href="#" onClick={openPrivacy} className={`hover:text-blue-500 transition-colors ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{t.nav.privacy}</a>
           </div>
 
           {/* Right Actions */}
@@ -221,8 +246,9 @@ export default function App() {
                         </div>
                         <div className="w-full max-w-sm transform hover:scale-[1.02] transition-transform duration-500 cursor-default">
                             <EntryCard 
-                                entry={DEMO_ENTRY} 
-                                theme={theme} 
+                                entry={demoEntry} 
+                                theme={theme}
+                                labels={t.demo.labels}
                             />
                         </div>
                      </div>
@@ -232,10 +258,33 @@ export default function App() {
                         <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 z-10 pointer-events-none ${isDark ? 'block' : 'hidden'}`}></div>
                         <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/80 z-10 pointer-events-none ${isDark ? 'hidden' : 'block'}`}></div>
                         
-                        <div className="flex-1 overflow-hidden opacity-90 scale-95 origin-top mt-10 md:mt-0">
-                            <TimelineTab theme={theme} />
+                        {/* Animation / Chart Toggle Area */}
+                        <div className="flex-1 relative">
+                            {showAnimation ? (
+                                <KLineAnimation 
+                                    theme={theme}
+                                    texts={t.demo.kline}
+                                    onComplete={() => setShowAnimation(false)}
+                                />
+                            ) : (
+                                <div className="h-full flex flex-col animate-in fade-in duration-700">
+                                    <div className="flex-1 overflow-hidden opacity-90 scale-95 origin-top mt-10 md:mt-0">
+                                        <TimelineTab theme={theme} />
+                                    </div>
+                                    <button 
+                                        onClick={() => setShowAnimation(true)}
+                                        className={`absolute bottom-32 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all hover:scale-105
+                                            ${isDark ? 'bg-white text-black' : 'bg-black text-white'}
+                                        `}
+                                    >
+                                        <Play size={12} fill="currentColor" />
+                                        Replay Analysis
+                                    </button>
+                                </div>
+                            )}
                         </div>
-                        <div className="absolute bottom-12 left-0 right-0 text-center z-20 px-6">
+
+                        <div className="absolute bottom-12 left-0 right-0 text-center z-20 px-6 pointer-events-none">
                             <h3 className="text-2xl font-bold mb-2 tracking-tight">{t.demo.viz_title}</h3>
                             <p className={`text-sm ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>{t.demo.viz_subtitle}</p>
                         </div>
@@ -309,7 +358,7 @@ export default function App() {
                                 <span className={`text-sm font-medium ${isDark ? 'text-zinc-300' : 'text-zinc-700'}`}>FaceID Lock</span>
                             </div>
                         </div>
-                        <a href={LINK_PRIVACY} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm font-bold text-emerald-500 hover:text-emerald-400 transition-colors">
+                        <a href="#" onClick={openPrivacy} className="inline-flex items-center text-sm font-bold text-emerald-500 hover:text-emerald-400 transition-colors">
                             {t.features.f2_link} <ChevronRight size={16} />
                         </a>
                       </div>
@@ -331,80 +380,78 @@ export default function App() {
 
                   {/* Feature 4: Context */}
                   <div className={`p-10 rounded-[40px] border relative overflow-hidden flex flex-col justify-center
-                      ${isDark ? 'bg-[#0a0a0a] border-zinc-800' : 'bg-white border-zinc-100 shadow-xl shadow-zinc-200/50'}
+                      ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-50 border-zinc-200'}
                   `}>
-                      <div className="relative z-10">
-                          <h3 className="text-2xl font-bold mb-3">{t.features.f4_title}</h3>
-                          <p className={`text-base leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                             {t.features.f4_desc}
-                          </p>
-                      </div>
-                      <div className="absolute right-[-20px] bottom-[-20px] opacity-10">
-                          <div className="w-40 h-40 rounded-full border-[12px] border-blue-500"></div>
-                      </div>
+                      <h3 className="text-xl font-bold mb-2">{t.features.f4_title}</h3>
+                      <p className={`text-sm ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>{t.features.f4_desc}</p>
                   </div>
-              </div>
-          </div>
-      </section>
 
-      {/* --- CTA SECTION --- */}
-      <section className="py-32 px-6 text-center relative overflow-hidden">
-          <div className={`absolute inset-0 bg-gradient-to-b ${isDark ? 'from-transparent to-zinc-900/50' : 'from-transparent to-zinc-100/50'} -z-10`}></div>
-          
-          <div className="max-w-3xl mx-auto">
-              <h2 className="text-5xl md:text-7xl font-serif italic mb-8 animate-breathe">{t.cta.title}</h2>
-              <p className={`text-lg mb-12 ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                  {t.cta.subtitle}
-              </p>
-              <a 
-                 href={LINK_APP_STORE}
-                 target="_blank"
-                 rel="noreferrer"
-                 className={`inline-flex h-16 px-12 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-2xl items-center gap-3
-                 ${isDark ? 'bg-white text-black' : 'bg-black text-white'}`}
-              >
-                  <span className="text-2xl mb-1"></span> {t.cta.button}
-              </a>
+              </div>
           </div>
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className={`py-12 border-t ${isDark ? 'bg-black border-white/5' : 'bg-white border-zinc-100'}`}>
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
-              <div className="col-span-1 md:col-span-2">
-                  <div className="flex items-center gap-2 mb-6">
-                        <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-white font-serif font-bold italic text-xs">T</div>
-                        <span className="font-bold text-lg tracking-tight">Trace.</span>
-                  </div>
-                  <p className={`max-w-xs text-sm leading-relaxed ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>
-                      {t.footer.desc}
-                  </p>
+      <footer className={`py-12 px-6 border-t ${isDark ? 'bg-black border-zinc-900' : 'bg-zinc-50 border-zinc-200'}`}>
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+              <div className="flex items-center gap-2 opacity-50">
+                 <span className="font-serif font-bold italic">T</span>
+                 <span className="text-sm font-medium">Trace. © 2024</span>
               </div>
-              
-              <div>
-                  <h4 className="font-bold mb-6 text-xs uppercase tracking-widest opacity-50">Product</h4>
-                  <ul className={`space-y-4 text-sm font-medium ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                      <li><a href="#features" className="hover:text-blue-500 transition-colors">Features</a></li>
-                      <li><a href={LINK_APP_STORE} target="_blank" rel="noreferrer" className="hover:text-blue-500 transition-colors">Download</a></li>
-                  </ul>
-              </div>
-
-              <div>
-                  <h4 className="font-bold mb-6 text-xs uppercase tracking-widest opacity-50">Legal</h4>
-                  <ul className={`space-y-4 text-sm font-medium ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                      <li><a href={LINK_PRIVACY} target="_blank" rel="noreferrer" className="hover:text-blue-500 transition-colors">{t.nav.privacy}</a></li>
-                      <li><a href={LINK_TERMS} target="_blank" rel="noreferrer" className="hover:text-blue-500 transition-colors">{t.nav.terms}</a></li>
-                  </ul>
-              </div>
-          </div>
-          <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-dashed border-zinc-800/50 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600">
-              <p>© {new Date().getFullYear()} Trace Inc. {t.footer.rights}</p>
-              <div className="flex gap-6 mt-4 md:mt-0">
-                  <span className="hover:text-blue-500 cursor-pointer transition-colors">Twitter</span>
-                  <span className="hover:text-blue-500 cursor-pointer transition-colors">Instagram</span>
+              <div className="flex items-center gap-6 text-sm font-medium opacity-60">
+                 <a href="#" onClick={openPrivacy} className="hover:opacity-100 transition-opacity">{t.nav.privacy}</a>
+                 <a href="#" onClick={openTerms} className="hover:opacity-100 transition-opacity">Terms</a>
+                 <a href="mailto:hello@trace.app" className="hover:opacity-100 transition-opacity">Contact</a>
               </div>
           </div>
       </footer>
+
+      {/* --- MODALS --- */}
+      
+      {/* Privacy Modal */}
+      {showPrivacyModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowPrivacyModal(false)}></div>
+            <div className={`relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300
+                ${isDark ? 'bg-[#121212] border border-zinc-800 text-zinc-300' : 'bg-white text-zinc-700'}
+            `}>
+                <button onClick={() => setShowPrivacyModal(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5 transition-colors">
+                    <X size={20} />
+                </button>
+                <div className="prose prose-lg dark:prose-invert">
+                    <h2 className="text-3xl font-bold mb-6">{t.modals.privacy_title}</h2>
+                    <p className="leading-relaxed whitespace-pre-line">{t.modals.privacy_content}</p>
+                </div>
+                <div className="mt-8 flex justify-end">
+                    <button onClick={() => setShowPrivacyModal(false)} className="px-6 py-2 rounded-full bg-blue-600 text-white font-bold text-sm hover:bg-blue-500 transition-colors">
+                        {t.modals.close}
+                    </button>
+                </div>
+            </div>
+        </div>
+      )}
+
+      {/* Terms Modal */}
+      {showTermsModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowTermsModal(false)}></div>
+            <div className={`relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300
+                ${isDark ? 'bg-[#121212] border border-zinc-800 text-zinc-300' : 'bg-white text-zinc-700'}
+            `}>
+                <button onClick={() => setShowTermsModal(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5 transition-colors">
+                    <X size={20} />
+                </button>
+                <div className="prose prose-lg dark:prose-invert">
+                    <h2 className="text-3xl font-bold mb-6">{t.modals.terms_title}</h2>
+                    <p className="leading-relaxed whitespace-pre-line">{t.modals.terms_content}</p>
+                </div>
+                <div className="mt-8 flex justify-end">
+                    <button onClick={() => setShowTermsModal(false)} className="px-6 py-2 rounded-full bg-blue-600 text-white font-bold text-sm hover:bg-blue-500 transition-colors">
+                        {t.modals.close}
+                    </button>
+                </div>
+            </div>
+        </div>
+      )}
 
     </div>
   );

@@ -3,6 +3,11 @@ import { Theme } from '../types';
 
 interface KLineAnimationProps {
   theme: Theme;
+  texts?: {
+    event: string;
+    patterns: string;
+    syncing: string;
+  };
   onComplete: () => void;
 }
 
@@ -14,7 +19,7 @@ interface CandleData {
   isUp: boolean;
 }
 
-const KLineAnimation: React.FC<KLineAnimationProps> = ({ theme, onComplete }) => {
+const KLineAnimation: React.FC<KLineAnimationProps> = ({ theme, texts, onComplete }) => {
     const isDark = theme === 'dark';
     // Colors
     const candleUp = isDark ? '#10b981' : '#3b82f6'; // Emerald / Blue
@@ -123,7 +128,7 @@ const KLineAnimation: React.FC<KLineAnimationProps> = ({ theme, onComplete }) =>
 
                 {/* Label appears after morph */}
                 <div className={`absolute -bottom-12 text-xs font-mono uppercase tracking-widest transition-opacity duration-700 delay-1000 ${stage >= 1 ? 'opacity-50' : 'opacity-0'} ${isDark ? 'text-white' : 'text-black'}`}>
-                        Event: Stress
+                        {texts?.event || 'Event: Stress'}
                 </div>
             </div>
 
@@ -188,13 +193,13 @@ const KLineAnimation: React.FC<KLineAnimationProps> = ({ theme, onComplete }) =>
 
                 <h2 className={`text-5xl font-bold tracking-tighter mb-4 text-center animate-in slide-in-from-bottom-4 fade-in duration-700 delay-1000
                     ${isDark ? 'text-white drop-shadow-2xl' : 'text-black drop-shadow-sm'}`}>
-                    Patterns Found.
+                    {texts?.patterns || 'Patterns Found.'}
                 </h2>
                 
                 <div className={`h-1.5 bg-blue-500 rounded-full transition-all duration-[3000ms] ease-out delay-1000 ${stage === 3 ? 'w-24 opacity-100' : 'w-0 opacity-0'}`}></div>
                 
                 <p className={`mt-4 text-xs uppercase tracking-[0.3em] font-medium animate-pulse ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                    Syncing Timeline...
+                    {texts?.syncing || 'Syncing Timeline...'}
                 </p>
             </div>
         </div>

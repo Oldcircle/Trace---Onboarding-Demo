@@ -21,7 +21,8 @@ import {
   Layout,
   Globe,
   ChevronDown,
-  Download
+  Download,
+  Play
 } from 'lucide-react';
 
 export {
@@ -47,5 +48,6 @@ export {
   Layout,
   Globe,
   ChevronDown,
-  Download
+  Download,
+  Play
 };

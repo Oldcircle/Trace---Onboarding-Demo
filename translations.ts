@@ -16,7 +16,29 @@ export const translations: Record<Language, any> = {
       title: 'Structured Memory',
       subtitle: 'Turning thoughts into data.',
       viz_title: 'Visualized Growth',
-      viz_subtitle: 'Emotional trends over time.'
+      viz_subtitle: 'Emotional trends over time.',
+      entry: {
+        rawText: "Project launch delayed today, client complained. Felt super stressed, went downstairs for a smoke to calm down.",
+        title: "Project Delay Crisis",
+        type: "work",
+        time: "14:30",
+        trigger: "Client Complaint / Delay",
+        emotion: "Anxiety / Stress",
+        action: "Smoke break / Pause",
+        result: "Emotionally stabilized",
+        tags: ["Work", "Stress", "Client"],
+        suggestion: "Try breaking remaining tasks into hourly chunks and proactively syncing client expectations."
+      },
+      labels: {
+        trigger: 'Trigger',
+        emotion: 'Emotion',
+        insight: 'Insight'
+      },
+      kline: {
+        event: 'Event: Stress',
+        patterns: 'Patterns Found.',
+        syncing: 'Syncing Timeline...'
+      }
     },
     features: {
       title: 'An OS for your mind.',
@@ -39,6 +61,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: 'Empowering self-discovery through structured memory and AI.',
       rights: 'All rights reserved.'
+    },
+    modals: {
+      privacy_title: 'Privacy Policy',
+      privacy_content: 'At Trace, we believe your thoughts are your own. All data is stored locally on your device and synced via your personal iCloud. We do not have access to your entries, and we do not sell your data to third parties. Your privacy is our business model.',
+      terms_title: 'Terms of Service',
+      terms_content: 'By using Trace, you agree to use the app for personal self-reflection. We provide tools for analysis but are not a substitute for professional psychological help. Subscriptions are billed to your Apple ID and auto-renew unless canceled 24 hours before the end of the period.',
+      close: 'Close'
     }
   },
   zh: {
@@ -56,7 +85,29 @@ export const translations: Record<Language, any> = {
       title: '结构化记忆',
       subtitle: '将思绪转化为数据。',
       viz_title: '可视化成长',
-      viz_subtitle: '跨越时间的情绪趋势。'
+      viz_subtitle: '跨越时间的情绪趋势。',
+      entry: {
+        rawText: "今天项目上线延期了，被客户投诉，感觉压力很大，在楼下抽了根烟冷静了一下。",
+        title: "项目延期危机",
+        type: "工作",
+        time: "14:30",
+        trigger: "客户投诉 / 上线延期",
+        emotion: "焦虑 / 压力",
+        action: "抽烟冷静 / 暂停工作",
+        result: "情绪暂时平复",
+        tags: ["工作", "压力", "客户"],
+        suggestion: "尝试将剩余任务拆解为小时级颗粒度，并主动同步客户预期。"
+      },
+      labels: {
+        trigger: '触发',
+        emotion: '情绪',
+        insight: '洞察'
+      },
+      kline: {
+        event: '事件: 压力',
+        patterns: '发现模式',
+        syncing: '同步时间线...'
+      }
     },
     features: {
       title: '大脑的操作系统。',
@@ -79,6 +130,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: '通过结构化记忆和人工智能赋能自我发现。',
       rights: '版权所有。'
+    },
+    modals: {
+      privacy_title: '隐私政策',
+      privacy_content: '在 Trace，我们要确保你的想法只属于你自己。所有数据均本地存储在您的设备上，并通过您的个人 iCloud 进行同步。我们无法访问您的日记条目，也不会将您的数据出售给第三方。保护您的隐私是我们商业模式的核心。',
+      terms_title: '服务条款',
+      terms_content: '使用 Trace 即表示您同意将本应用用于个人反思。我们提供分析工具，但不能替代专业的心理咨询帮助。订阅费用将从您的 Apple ID 扣除，除非在当前周期结束前 24 小时取消，否则将自动续订。',
+      close: '关闭'
     }
   },
   jp: {
@@ -96,7 +154,29 @@ export const translations: Record<Language, any> = {
       title: '構造化された記憶',
       subtitle: '思考をデータに変える。',
       viz_title: '成長の可視化',
-      viz_subtitle: '感情のトレンドを追跡。'
+      viz_subtitle: '感情のトレンドを追跡。',
+      entry: {
+        rawText: "プロジェクトのリリースが遅れ、クライアントから苦情。強いストレスを感じ、下でタバコを吸って落ち着いた。",
+        title: "プロジェクト遅延の危機",
+        type: "仕事",
+        time: "14:30",
+        trigger: "苦情 / 遅延",
+        emotion: "不安 / ストレス",
+        action: "喫煙休憩 / 一時停止",
+        result: "感情が一時的に安定",
+        tags: ["仕事", "ストレス", "クライアント"],
+        suggestion: "残りのタスクを1時間単位に分割し、クライアントの期待値を能動的に調整してみてください。"
+      },
+      labels: {
+        trigger: 'トリガー',
+        emotion: '感情',
+        insight: 'インサイト'
+      },
+      kline: {
+        event: 'イベント: ストレス',
+        patterns: 'パターン発見',
+        syncing: 'タイムライン同期中...'
+      }
     },
     features: {
       title: '思考のためのOS。',
@@ -119,6 +199,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: '構造化された記憶とAIを通じて自己発見を支援します。',
       rights: 'All rights reserved.'
+    },
+    modals: {
+      privacy_title: 'プライバシーポリシー',
+      privacy_content: 'Traceでは、あなたの思考はあなただけのものだと信じています。すべてのデータはデバイスにローカル保存され、個人のiCloud経由で同期されます。私たちはあなたのエントリーにアクセスすることはなく、第三者にデータを販売することもありません。あなたのプライバシーこそが、私たちのビジネスモデルです。',
+      terms_title: '利用規約',
+      terms_content: 'Traceを使用することで、自己反省のためにアプリを使用することに同意したものとみなされます。分析ツールを提供しますが、専門的な心理的支援の代わりにはなりません。サブスクリプションはApple IDに請求され、期間終了の24時間前にキャンセルされない限り自動更新されます。',
+      close: '閉じる'
     }
   },
   ko: {
@@ -136,7 +223,29 @@ export const translations: Record<Language, any> = {
       title: '구조화된 기억',
       subtitle: '생각을 데이터로 변환.',
       viz_title: '시각화된 성장',
-      viz_subtitle: '시간에 따른 감정 흐름.'
+      viz_subtitle: '시간에 따른 감정 흐름.',
+      entry: {
+        rawText: "오늘 프로젝트 출시가 지연되어 고객 불만이 접수됨. 큰 스트레스를 받아 아래층에서 담배를 피우며 진정함.",
+        title: "프로젝트 지연 위기",
+        type: "업무",
+        time: "14:30",
+        trigger: "고객 불만 / 지연",
+        emotion: "불안 / 스트레스",
+        action: "흡연 휴식 / 일시 중지",
+        result: "감정 일시적 안정",
+        tags: ["업무", "스트레스", "고객"],
+        suggestion: "남은 작업을 시간 단위로 쪼개고 고객의 기대치를 능동적으로 조율해보세요."
+      },
+      labels: {
+        trigger: '트리거',
+        emotion: '감정',
+        insight: '인사이트'
+      },
+      kline: {
+        event: '이벤트: 스트레스',
+        patterns: '패턴 발견',
+        syncing: '타임라인 동기화 중...'
+      }
     },
     features: {
       title: '마음을 위한 OS.',
@@ -159,6 +268,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: '구조화된 기억과 AI를 통한 자아 발견.',
       rights: 'All rights reserved.'
+    },
+    modals: {
+      privacy_title: '개인정보 처리방침',
+      privacy_content: 'Trace는 당신의 생각이 온전히 당신의 것이라고 믿습니다. 모든 데이터는 기기에 로컬로 저장되며 개인 iCloud를 통해 동기화됩니다. 우리는 당신의 기록에 접근할 수 없으며, 제3자에게 데이터를 판매하지 않습니다. 당신의 프라이버시가 우리의 비즈니스 모델입니다.',
+      terms_title: '이용 약관',
+      terms_content: 'Trace를 사용함으로써 개인적인 자기 성찰을 위해 앱을 사용하는 데 동의하는 것입니다. 우리는 분석 도구를 제공하지만 전문적인 심리 상담을 대체할 수는 없습니다. 구독료는 Apple ID로 청구되며 기간 종료 24시간 전에 취소하지 않으면 자동 갱신됩니다.',
+      close: '닫기'
     }
   },
   de: {
@@ -176,7 +292,29 @@ export const translations: Record<Language, any> = {
       title: 'Strukturierte Erinnerung',
       subtitle: 'Gedanken in Daten verwandeln.',
       viz_title: 'Visualisiertes Wachstum',
-      viz_subtitle: 'Emotionale Trends im Zeitverlauf.'
+      viz_subtitle: 'Emotionale Trends im Zeitverlauf.',
+      entry: {
+        rawText: "Projektstart heute verzögert, Kunde hat sich beschwert. Fühlte mich super gestresst, ging runter eine rauchen zum Runterkommen.",
+        title: "Projektverzögerungs-Krise",
+        type: "Arbeit",
+        time: "14:30",
+        trigger: "Kundenbeschwerde / Verzögerung",
+        emotion: "Angst / Stress",
+        action: "Raucherpause / Pause",
+        result: "Emotional stabilisiert",
+        tags: ["Arbeit", "Stress", "Kunde"],
+        suggestion: "Versuche, verbleibende Aufgaben in Stundenblöcke zu teilen und Kundenerwartungen aktiv zu managen."
+      },
+      labels: {
+        trigger: 'Auslöser',
+        emotion: 'Emotion',
+        insight: 'Einsicht'
+      },
+      kline: {
+        event: 'Ereignis: Stress',
+        patterns: 'Muster gefunden',
+        syncing: 'Synchronisiere Zeitlinie...'
+      }
     },
     features: {
       title: 'Ein OS für deinen Geist.',
@@ -199,6 +337,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: 'Selbstentdeckung durch strukturierte Erinnerung und KI.',
       rights: 'Alle Rechte vorbehalten.'
+    },
+    modals: {
+      privacy_title: 'Datenschutzerklärung',
+      privacy_content: 'Bei Trace glauben wir, dass Ihre Gedanken Ihnen gehören. Alle Daten werden lokal auf Ihrem Gerät gespeichert und über Ihre persönliche iCloud synchronisiert. Wir haben keinen Zugriff auf Ihre Einträge und verkaufen Ihre Daten nicht an Dritte. Ihre Privatsphäre ist unser Geschäftsmodell.',
+      terms_title: 'Nutzungsbedingungen',
+      terms_content: 'Durch die Nutzung von Trace stimmen Sie zu, die App zur persönlichen Selbstreflexion zu nutzen. Wir bieten Analysetools, sind aber kein Ersatz für professionelle psychologische Hilfe. Abonnements werden über Ihre Apple-ID abgerechnet und verlängern sich automatisch, sofern sie nicht 24 Stunden vor Ablauf gekündigt werden.',
+      close: 'Schließen'
     }
   },
   fr: {
@@ -217,6 +362,28 @@ export const translations: Record<Language, any> = {
       subtitle: 'Transformer les pensées en données.',
       viz_title: 'Croissance Visualisée',
       viz_subtitle: 'Tendances émotionnelles.',
+      entry: {
+        rawText: "Lancement du projet retardé aujourd'hui, le client s'est plaint. Je me sentais super stressé, je suis descendu fumer pour me calmer.",
+        title: "Crise de retard de projet",
+        type: "Travail",
+        time: "14:30",
+        trigger: "Plainte client / Retard",
+        emotion: "Anxiété / Stress",
+        action: "Pause cigarette / Pause",
+        result: "Émotionnellement stabilisé",
+        tags: ["Travail", "Stress", "Client"],
+        suggestion: "Essayez de diviser les tâches restantes en blocs d'une heure et de synchroniser proactivement les attentes du client."
+      },
+      labels: {
+        trigger: 'Déclencheur',
+        emotion: 'Émotion',
+        insight: 'Insight'
+      },
+      kline: {
+        event: 'Événement: Stress',
+        patterns: 'Modèles trouvés',
+        syncing: 'Synchronisation...'
+      }
     },
     features: {
       title: 'Un OS pour votre esprit.',
@@ -239,6 +406,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: 'La découverte de soi par la mémoire structurée.',
       rights: 'Tous droits réservés.'
+    },
+    modals: {
+      privacy_title: 'Politique de confidentialité',
+      privacy_content: 'Chez Trace, nous croyons que vos pensées vous appartiennent. Toutes les données sont stockées localement sur votre appareil et synchronisées via votre iCloud personnel. Nous n\'avons pas accès à vos entrées et ne vendons pas vos données à des tiers. Votre vie privée est notre modèle économique.',
+      terms_title: 'Conditions d\'utilisation',
+      terms_content: 'En utilisant Trace, vous acceptez d\'utiliser l\'application pour une réflexion personnelle. Nous fournissons des outils d\'analyse mais ne remplaçons pas une aide psychologique professionnelle. Les abonnements sont facturés sur votre identifiant Apple et se renouvellent automatiquement sauf annulation 24 heures avant la fin de la période.',
+      close: 'Fermer'
     }
   },
   es: {
@@ -257,6 +431,28 @@ export const translations: Record<Language, any> = {
       subtitle: 'Convirtiendo pensamientos en datos.',
       viz_title: 'Crecimiento Visualizado',
       viz_subtitle: 'Tendencias emocionales.',
+      entry: {
+        rawText: "El lanzamiento del proyecto se retrasó hoy, el cliente se quejó. Me sentí súper estresado, bajé a fumar para calmarme.",
+        title: "Crisis de retraso del proyecto",
+        type: "Trabajo",
+        time: "14:30",
+        trigger: "Queja del cliente / Retraso",
+        emotion: "Ansiedad / Estrés",
+        action: "Pausa para fumar / Pausa",
+        result: "Emocionalmente estabilizado",
+        tags: ["Trabajo", "Estrés", "Cliente"],
+        suggestion: "Intenta dividir las tareas restantes en bloques de una hora y sincronizar proactivamente las expectativas del cliente."
+      },
+      labels: {
+        trigger: 'Detonante',
+        emotion: 'Emoción',
+        insight: 'Insight'
+      },
+      kline: {
+        event: 'Evento: Estrés',
+        patterns: 'Patrones encontrados',
+        syncing: 'Sincronizando...'
+      }
     },
     features: {
       title: 'Un SO para tu mente.',
@@ -279,6 +475,13 @@ export const translations: Record<Language, any> = {
     footer: {
       desc: 'Empoderando el autodescubrimiento a través de la IA.',
       rights: 'Todos los derechos reservados.'
+    },
+    modals: {
+      privacy_title: 'Política de Privacidad',
+      privacy_content: 'En Trace, creemos que tus pensamientos son tuyos. Todos los datos se almacenan localmente en tu dispositivo y se sincronizan a través de tu iCloud personal. No tenemos acceso a tus entradas y no vendemos tus datos a terceros. Tu privacidad es nuestro modelo de negocio.',
+      terms_title: 'Términos de Servicio',
+      terms_content: 'Al usar Trace, aceptas usar la aplicación para la autorreflexión personal. Proporcionamos herramientas de análisis pero no sustituimos la ayuda psicológica profesional. Las suscripciones se facturan a tu ID de Apple y se renuevan automáticamente a menos que se cancelen 24 horas antes del final del período.',
+      close: 'Cerrar'
     }
   }
 };
