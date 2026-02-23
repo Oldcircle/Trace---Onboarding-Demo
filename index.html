@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trace - Record Your Path</title>
+    <title>Trace - See how you became you.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
@@ -46,6 +46,10 @@
       .animate-scan {
         animation: scan-line 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 60%, transparent 100%);
+      }
+      
+      html {
+          scroll-behavior: smooth;
       }
     </style>
   <script type="importmap">

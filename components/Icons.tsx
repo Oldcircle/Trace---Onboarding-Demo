@@ -16,7 +16,12 @@ import {
   Sun,
   Moon,
   Edit2,
-  X
+  X,
+  Shield,
+  Layout,
+  Globe,
+  ChevronDown,
+  Download
 } from 'lucide-react';
 
 export {
@@ -37,5 +42,10 @@ export {
   Sun,
   Moon,
   Edit2,
-  X
+  X,
+  Shield,
+  Layout,
+  Globe,
+  ChevronDown,
+  Download
 };
