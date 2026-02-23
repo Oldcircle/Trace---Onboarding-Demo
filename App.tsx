@@ -1,11 +1,20 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Theme, Language, TraceEntry } from './types';
 import { translations } from './translations';
-import { Sun, Moon, ArrowRight, Check, Shield, Zap, Layout, ChevronRight, Globe, ChevronDown, Download, X, Play } from './components/Icons';
+import { Sun, Moon, ArrowRight, Check, Zap, Globe, ChevronDown, Download, Play } from './components/Icons';
 import EntryCard from './components/EntryCard';
 import TimelineTab from './components/TimelineTab';
-import StatsTab from './components/StatsTab';
 import KLineAnimation from './components/KLineAnimation';
+
+// New Components
+import PainPoints from './components/PainPoints';
+import HowItWorks from './components/HowItWorks';
+import Features from './components/Features';
+import VisualShowcase from './components/VisualShowcase';
+import UserStories from './components/UserStories';
+import Pricing from './components/Pricing';
+import Footer from './components/Footer';
 
 // Legal Links & App Store
 const LINK_APP_STORE = "https://apps.apple.com/in/app/trace-see-how-you-became-you/id6758615892";
@@ -23,7 +32,7 @@ const LANG_OPTIONS: {code: Language, label: string}[] = [
 
 export default function App() {
   const [theme, setTheme] = useState<Theme>('dark');
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('zh'); // Default to Chinese as per request
   const [scrolled, setScrolled] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [showAnimation, setShowAnimation] = useState(true);
@@ -298,157 +307,74 @@ export default function App() {
          </div>
       </section>
 
-      {/* --- FEATURES GRID (Bento Box) --- */}
-      <section id="features" className="py-24 px-6 relative">
-          <div className="max-w-7xl mx-auto">
-              <div className="mb-20 text-center">
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{t.features.title}</h2>
-                  <p className={`text-xl font-light ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>{t.features.subtitle}</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
-                  
-                  {/* Feature 1: Frictionless Input (Large) */}
-                  <div className={`col-span-1 md:col-span-2 p-10 rounded-[40px] border relative overflow-hidden group transition-all duration-500 hover:shadow-2xl
-                      ${isDark 
-                        ? 'bg-[#0a0a0a] border-zinc-800 hover:border-zinc-700' 
-                        : 'bg-white border-zinc-100 hover:border-zinc-200 shadow-xl shadow-zinc-200/50'}
-                  `}>
-                      <div className={`absolute top-0 right-0 p-10 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110 rotate-12 ${isDark ? 'text-white' : 'text-black'}`}>
-                          <Layout size={240} />
-                      </div>
-                      <div className="relative z-10 h-full flex flex-col justify-between">
-                          <div className="mb-8">
-                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30">
-                                <Zap size={28} fill="currentColor" />
-                             </div>
-                             <h3 className="text-3xl font-bold mb-4 tracking-tight">{t.features.f1_title}</h3>
-                             <p className={`max-w-md text-lg leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                                 {t.features.f1_desc}
-                             </p>
-                          </div>
-                          <div className="flex gap-2">
-                             <div className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border ${isDark ? 'bg-black border-zinc-800 text-zinc-500' : 'bg-zinc-50 border-zinc-200 text-zinc-500'}`}>Auto-Tagging</div>
-                             <div className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border ${isDark ? 'bg-black border-zinc-800 text-zinc-500' : 'bg-zinc-50 border-zinc-200 text-zinc-500'}`}>Sentiment Score</div>
-                          </div>
-                      </div>
-                  </div>
-
-                  {/* Feature 2: Privacy (Tall) */}
-                  <div id="privacy" className={`row-span-2 p-10 rounded-[40px] border relative overflow-hidden flex flex-col
-                      ${isDark 
-                        ? 'bg-gradient-to-b from-zinc-900 to-black border-zinc-800' 
-                        : 'bg-gradient-to-b from-white to-zinc-50 border-zinc-100 shadow-xl shadow-zinc-200/50'}
-                  `}>
-                      <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-6 border border-emerald-500/20">
-                         <Shield size={28} />
-                      </div>
-                      <h3 className="text-3xl font-bold mb-4 tracking-tight">{t.features.f2_title}</h3>
-                      <p className={`mb-8 text-lg leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                          {t.features.f2_desc}
-                      </p>
-                      <div className="mt-auto">
-                        <div className={`p-4 rounded-2xl border mb-6 ${isDark ? 'bg-black/50 border-zinc-800' : 'bg-white border-zinc-200'}`}>
-                            <div className="flex items-center gap-3 mb-2">
-                                <Check size={16} className="text-emerald-500" />
-                                <span className={`text-sm font-medium ${isDark ? 'text-zinc-300' : 'text-zinc-700'}`}>Local Processing</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Check size={16} className="text-emerald-500" />
-                                <span className={`text-sm font-medium ${isDark ? 'text-zinc-300' : 'text-zinc-700'}`}>FaceID Lock</span>
-                            </div>
-                        </div>
-                        <a href="#" onClick={openPrivacy} className="inline-flex items-center text-sm font-bold text-emerald-500 hover:text-emerald-400 transition-colors">
-                            {t.features.f2_link} <ChevronRight size={16} />
-                        </a>
-                      </div>
-                  </div>
-
-                  {/* Feature 3: Stats Preview */}
-                  <div className={`p-8 rounded-[40px] border relative overflow-hidden flex flex-col transition-all hover:scale-[1.01]
-                      ${isDark ? 'bg-[#0a0a0a] border-zinc-800' : 'bg-white border-zinc-100 shadow-xl shadow-zinc-200/50'}
-                  `}>
-                      <div className="mb-4 relative z-10">
-                          <h3 className="text-xl font-bold">{t.features.f3_title}</h3>
-                          <p className={`text-sm ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>{t.features.f3_desc}</p>
-                      </div>
-                      {/* Mini Stats Component */}
-                      <div className="flex-1 opacity-75 pointer-events-none scale-90 origin-top-left -ml-4 w-[120%] mask-gradient-b">
-                          <StatsTab theme={theme} />
-                      </div>
-                  </div>
-
-                  {/* Feature 4: Context */}
-                  <div className={`p-10 rounded-[40px] border relative overflow-hidden flex flex-col justify-center
-                      ${isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-50 border-zinc-200'}
-                  `}>
-                      <h3 className="text-xl font-bold mb-2">{t.features.f4_title}</h3>
-                      <p className={`text-sm ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}>{t.features.f4_desc}</p>
-                  </div>
-
-              </div>
-          </div>
-      </section>
-
-      {/* --- FOOTER --- */}
-      <footer className={`py-12 px-6 border-t ${isDark ? 'bg-black border-zinc-900' : 'bg-zinc-50 border-zinc-200'}`}>
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-              <div className="flex items-center gap-2 opacity-50">
-                 <span className="font-serif font-bold italic">T</span>
-                 <span className="text-sm font-medium">Trace. © 2024</span>
-              </div>
-              <div className="flex items-center gap-6 text-sm font-medium opacity-60">
-                 <a href="#" onClick={openPrivacy} className="hover:opacity-100 transition-opacity">{t.nav.privacy}</a>
-                 <a href="#" onClick={openTerms} className="hover:opacity-100 transition-opacity">Terms</a>
-                 <a href="mailto:hello@trace.app" className="hover:opacity-100 transition-opacity">Contact</a>
-              </div>
-          </div>
-      </footer>
+      {/* --- NEW SECTIONS --- */}
+      
+      <PainPoints language={language} isDark={isDark} />
+      
+      <HowItWorks language={language} isDark={isDark} />
+      
+      <Features language={language} isDark={isDark} />
+      
+      <VisualShowcase language={language} isDark={isDark} />
+      
+      <UserStories language={language} isDark={isDark} />
+      
+      <Pricing language={language} isDark={isDark} />
+      
+      <Footer 
+        language={language} 
+        isDark={isDark} 
+        onOpenPrivacy={openPrivacy}
+        onOpenTerms={openTerms}
+      />
 
       {/* --- MODALS --- */}
-      
-      {/* Privacy Modal */}
       {showPrivacyModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowPrivacyModal(false)}></div>
-            <div className={`relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300
-                ${isDark ? 'bg-[#121212] border border-zinc-800 text-zinc-300' : 'bg-white text-zinc-700'}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className={`max-w-md w-full p-8 rounded-3xl relative animate-in zoom-in-95 duration-200
+                ${isDark ? 'bg-zinc-900 border border-zinc-800' : 'bg-white'}
             `}>
-                <button onClick={() => setShowPrivacyModal(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5 transition-colors">
-                    <X size={20} />
+                <button 
+                    onClick={() => setShowPrivacyModal(false)}
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-zinc-800/10 transition-colors"
+                >
+                    <div className="w-6 h-6 flex items-center justify-center">✕</div>
                 </button>
-                <div className="prose prose-lg dark:prose-invert">
-                    <h2 className="text-3xl font-bold mb-6">{t.modals.privacy_title}</h2>
-                    <p className="leading-relaxed whitespace-pre-line">{t.modals.privacy_content}</p>
-                </div>
-                <div className="mt-8 flex justify-end">
-                    <button onClick={() => setShowPrivacyModal(false)} className="px-6 py-2 rounded-full bg-blue-600 text-white font-bold text-sm hover:bg-blue-500 transition-colors">
-                        {t.modals.close}
-                    </button>
-                </div>
+                <h3 className="text-2xl font-bold mb-4">{t.modals.privacy_title}</h3>
+                <p className={`leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                    {t.modals.privacy_content}
+                </p>
+                <button 
+                    onClick={() => setShowPrivacyModal(false)}
+                    className="mt-8 w-full py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 transition-colors"
+                >
+                    {t.modals.close}
+                </button>
             </div>
         </div>
       )}
 
-      {/* Terms Modal */}
       {showTermsModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowTermsModal(false)}></div>
-            <div className={`relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-300
-                ${isDark ? 'bg-[#121212] border border-zinc-800 text-zinc-300' : 'bg-white text-zinc-700'}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className={`max-w-md w-full p-8 rounded-3xl relative animate-in zoom-in-95 duration-200
+                ${isDark ? 'bg-zinc-900 border border-zinc-800' : 'bg-white'}
             `}>
-                <button onClick={() => setShowTermsModal(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5 transition-colors">
-                    <X size={20} />
+                <button 
+                    onClick={() => setShowTermsModal(false)}
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-zinc-800/10 transition-colors"
+                >
+                    <div className="w-6 h-6 flex items-center justify-center">✕</div>
                 </button>
-                <div className="prose prose-lg dark:prose-invert">
-                    <h2 className="text-3xl font-bold mb-6">{t.modals.terms_title}</h2>
-                    <p className="leading-relaxed whitespace-pre-line">{t.modals.terms_content}</p>
-                </div>
-                <div className="mt-8 flex justify-end">
-                    <button onClick={() => setShowTermsModal(false)} className="px-6 py-2 rounded-full bg-blue-600 text-white font-bold text-sm hover:bg-blue-500 transition-colors">
-                        {t.modals.close}
-                    </button>
-                </div>
+                <h3 className="text-2xl font-bold mb-4">{t.modals.terms_title}</h3>
+                <p className={`leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                    {t.modals.terms_content}
+                </p>
+                <button 
+                    onClick={() => setShowTermsModal(false)}
+                    className="mt-8 w-full py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 transition-colors"
+                >
+                    {t.modals.close}
+                </button>
             </div>
         </div>
       )}

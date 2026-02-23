@@ -22,7 +22,16 @@ import {
   Globe,
   ChevronDown,
   Download,
-  Play
+  Play,
+  Cloud,
+  RefreshCw,
+  BookOpen,
+  Lightbulb,
+  Mic,
+  MessageCircle,
+  Twitter,
+  Github,
+  User
 } from 'lucide-react';
 
 export {
@@ -49,5 +58,14 @@ export {
   Globe,
   ChevronDown,
   Download,
-  Play
+  Play,
+  Cloud,
+  RefreshCw,
+  BookOpen,
+  Lightbulb,
+  Mic,
+  MessageCircle,
+  Twitter,
+  Github,
+  User
 };
