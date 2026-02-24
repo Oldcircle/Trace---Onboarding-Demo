@@ -14,7 +14,8 @@ interface EntryCardProps {
 }
 
 const EntryCard: React.FC<EntryCardProps> = ({ entry, theme, labels, onClick }) => {
-  const isPositive = entry.impactScore >= 0;
+  const overallScore = 0.6 * entry.impactScore + 0.4 * entry.moodScore;
+  const isPositive = overallScore >= 0;
   const isDark = theme === 'dark';
 
   const lbl = labels || {

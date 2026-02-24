@@ -117,7 +117,7 @@ const EntryDetailModal: React.FC<EntryDetailModalProps> = ({ entry, theme, onClo
                     <div className="flex justify-between items-center">
                         <p className={`text-sm leading-relaxed ${isDark ? 'text-zinc-300' : 'text-zinc-700'}`}>{entry.emotion}</p>
                         <div className={`h-1.5 w-24 rounded-full overflow-hidden ${isDark ? 'bg-zinc-800' : 'bg-zinc-200'}`}>
-                            <div className={`h-full ${entry.moodScore > 50 ? 'bg-emerald-500' : 'bg-rose-500'}`} style={{width: `${entry.moodScore}%`}}></div>
+                            <div className={`h-full ${entry.moodScore > 0 ? 'bg-emerald-500' : 'bg-rose-500'}`} style={{width: `${((entry.moodScore + 10) / 20) * 100}%`}}></div>
                         </div>
                     </div>
                 </div>

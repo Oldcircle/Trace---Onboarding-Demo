@@ -36,9 +36,7 @@ export default function Footer({ language, isDark, onOpenPrivacy, onOpenTerms }:
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-500 transition-all shadow-lg hover:shadow-blue-500/30"
           >
             <Download size={24} />
-            {t.links.contact && "Download App"} {/* Fallback if needed, but should use t.nav.download or similar if available, here using hardcoded or t keys */}
-            {/* Actually let's use the text from subtitle or just hardcode 'Download' based on language logic if t.download is not in footer */}
-            Download Trace
+            {t.subtitle}
           </a>
         </div>
 

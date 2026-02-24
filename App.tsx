@@ -46,8 +46,8 @@ export default function App() {
   // Construct localized demo entry
   const demoEntry: TraceEntry = {
     id: 'demo-1',
-    moodScore: 35,
-    impactScore: -15,
+    moodScore: -3,
+    impactScore: -4,
     ...t.demo.entry,
     type: t.demo.entry.type as any
   };
@@ -100,10 +100,11 @@ export default function App() {
       >
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-             <div className="relative w-8 h-8 flex items-center justify-center">
-                 <div className="absolute inset-0 bg-blue-600 rounded-xl rotate-0 group-hover:rotate-6 transition-transform duration-300"></div>
-                 <span className="relative text-white font-serif font-bold italic text-lg">T</span>
-             </div>
+             <img
+                src={`${import.meta.env.BASE_URL}logo.png`}
+                alt="Trace"
+                className="w-8 h-8 rounded-xl group-hover:rotate-6 transition-transform duration-300"
+             />
              <span className={`font-bold text-lg tracking-tight hidden sm:block ${isDark ? 'text-white' : 'text-zinc-900'}`}>Trace.</span>
           </div>
 

@@ -6,8 +6,8 @@ export interface TraceEntry {
   time: string; // ISO string or simple time
   trigger: string;
   emotion: string;
-  moodScore: number; // 0-100
-  impactScore: number; // -100 to 100
+  moodScore: number; // -10 to 10
+  impactScore: number; // -10 to 10
   action: string;
   result: string;
   tags: string[];

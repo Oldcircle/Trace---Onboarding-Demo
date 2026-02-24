@@ -20,9 +20,9 @@ export default function VisualShowcase({ language, isDark }: VisualShowcaseProps
         </p>
       </div>
 
-      <div className="relative w-full max-w-6xl mx-auto h-[400px] md:h-[500px] rounded-3xl border overflow-hidden
+      <div className={`relative w-full max-w-6xl mx-auto h-[400px] md:h-[500px] rounded-3xl border overflow-hidden
         ${isDark ? 'bg-zinc-900/30 border-zinc-800' : 'bg-zinc-50 border-zinc-200'}
-      ">
+      `}>
         {/* Simulated Chart Grid */}
         <div className="absolute inset-0 grid grid-cols-7 grid-rows-5 opacity-10">
           {Array.from({ length: 35 }).map((_, i) => (
@@ -62,7 +62,7 @@ export default function VisualShowcase({ language, isDark }: VisualShowcaseProps
 
            {/* Annotations */}
            <foreignObject x="26%" y="30%" width="150" height="50">
-             <div className={`text-xs font-mono p-2 rounded bg-white/10 backdrop-blur border border-white/20 text-white`}>
+             <div className={`text-xs font-mono p-2 rounded backdrop-blur border ${isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-black/10 border-black/20 text-black'}`}>
                {t.labels.workout}
              </div>
            </foreignObject>
@@ -70,7 +70,7 @@ export default function VisualShowcase({ language, isDark }: VisualShowcaseProps
            <rect x="35%" y="55%" width="10" height="30" fill="#EF4444" rx="2" />
            
            <foreignObject x="36%" y="65%" width="150" height="50">
-             <div className={`text-xs font-mono p-2 rounded bg-white/10 backdrop-blur border border-white/20 text-white`}>
+             <div className={`text-xs font-mono p-2 rounded backdrop-blur border ${isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-black/10 border-black/20 text-black'}`}>
                {t.labels.meeting}
              </div>
            </foreignObject>
@@ -80,7 +80,7 @@ export default function VisualShowcase({ language, isDark }: VisualShowcaseProps
            <rect x="65%" y="25%" width="10" height="70" fill="#10B981" rx="2" />
            
            <foreignObject x="66%" y="15%" width="150" height="50">
-             <div className={`text-xs font-mono p-2 rounded bg-white/10 backdrop-blur border border-white/20 text-white`}>
+             <div className={`text-xs font-mono p-2 rounded backdrop-blur border ${isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-black/10 border-black/20 text-black'}`}>
                {t.labels.streak}
              </div>
            </foreignObject>
